@@ -2,11 +2,11 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /quillor-clients/ednc/reach/
+RewriteBase /quillor-clients/ednc/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /quillor-clients/ednc/reach/index.php [L]
+RewriteRule . /quillor-clients/ednc/index.php [L]
 </IfModule>
 
 # END WordPress
