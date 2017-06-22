@@ -32,6 +32,12 @@ SAGE STEPS (stable version 8) because the version 9 is still under development i
 	* that command means to Compile and optimize the files in your assets directory.
 	
   6. To add a custom post type.
+    * From your theme folder navigate to functions.php and add this value under the $sage_includes "lib/custom-post-types.php"
+	  means that all your custom post type code will be coded on that file.
+	* Navigate to 'lib/custom-post-types.php' if you don't have that file then please create that file.
+	* In this file make sure you call first this code 'namespace Roots\Sage\CPT;' for sage functions.
+	* then below that you can now register your new post types, taxonomies, rewrite rules and other functions.
+	* I did make a sample so you can just copy and paste it.
 	
   7. From here, you can customize your theme.. all of this steps can be found here https://roots.io/sage/docs/theme-installation/
 	  
