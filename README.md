@@ -6,7 +6,7 @@ SAGE STEPS (stable version 8) because the version 9 is still under development i
 ## INSTALLATION
 Before starting make sure you have [Composer](https://getcomposer.org/download/) installed
 
-### Open terminal and go/point it to your wordpress theme directory,  replace your-theme-name with the name of your theme, 8.5.1 is the latest stable version of sage	
+### Open terminal and go/point it to your wordpress theme directory,  replace `your-theme-name` with the name of your theme, 8.5.1 is the latest stable version of sage	
 
 ```shell
 c> cd wamp/www/site/wp-content/themes/ 
@@ -39,14 +39,12 @@ the first two command is for global command.
 1. From your theme folder navigate to `lib/setup.php` and add your custom navigation below this line (Register sidebars).
 2. You can just duplicate and rename/duplicate the default sidebars.
 3. Then navigate to `themes/templates` add your new file to display the custom side bar i.e. my-sidebar.php OR You can directly inject the sidebar to any file i.e. footer.php/header.php.
-4. then just paste this code 
-`<?php dynamic_sidebar('your-side-bar-id-name'); ?> `
-5. then go to terminal/cli and from your theme path write this command:
-`your-theme-name> gulp`
+4. then just paste this code `<?php dynamic_sidebar('your-side-bar-id-name'); ?> `
+5. then go to terminal/cli and from your theme path write this command:`your-theme-name> gulp`
 6. that command means to Compile and optimize the files in your assets directory.
 
 ### To add a custom post type. (I created this by myself so just copy and paste the default options/data)
-1. From your theme folder navigate to functions.php and add this value under the $sage_includes `lib/custom-post-types.php`
+1. From your theme folder navigate to `functions.php` and add this value under the $sage_includes `lib/custom-post-types.php`
 means that all your custom post type code will be coded on that file.
 2. Navigate to `lib/custom-post-types.php` if you don't have that file then please create that file.
 3. In this file make sure you call first this code `namespace Roots\Sage\CPT;` for sage functions.
