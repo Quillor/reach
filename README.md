@@ -4,16 +4,16 @@ EducationNC Reach website
 SAGE STEPS (stable version 8) because the version 9 is still under development if we will use the v9 then we will follow the github steps then it uses yarn:
 
 ## INSTALLATION
-  ### Before starting make sure you have [Composer](https://getcomposer.org/download/) installed:
+  ### Before starting make sure you have [Composer](https://getcomposer.org/download/) installed
   
-  ### Open terminal and go/point it to your wordpress theme directory,  replace your-theme-name with the name of your theme, 8.5.1 is the latest stable version of sage: 	
+  ### Open terminal and go/point it to your wordpress theme directory,  replace your-theme-name with the name of your theme, 8.5.1 is the latest stable version of sage	
 	  ```shell
 	  c> cd wamp/www/site/wp-content/themes/ 
 	  themes> composer create-project roots/sage your-theme-name 8.5.1
 	  ```
 	 
 	
-  ### Installing project dependencies:
+  ### Installing project dependencies
     1. Install the latest Node.js
 	2. After installing Node.js, we recommend that you update to the latest version of npm and other dependencies.
 	   - Install the latest npm, gulp and bower
@@ -25,7 +25,7 @@ SAGE STEPS (stable version 8) because the version 9 is still under development i
 	   ```
 	   the first two command is for global command.
 	   
-  ### To add a custom nav: 
+  ### To add a custom nav
     1. From your theme folder navigate to lib/setup.php and add your custom navigation below this line 
 		```shell
 			Register wp_nav_menu() menus
@@ -40,7 +40,7 @@ SAGE STEPS (stable version 8) because the version 9 is still under development i
 		```
 	4. that command means to Compile and optimize the files in your assets directory.
   
-  ### To add a custom sidebar:
+  ### To add a custom sidebar
     1. From your theme folder navigate to lib/setup.php and add your custom navigation below this line (Register sidebars).
 	2. You can just duplicate and rename/duplicate the default sidebars.
 	3. Then navigate to themes/templates add your new file to display the custom side bar i.e. my-sidebar.php OR You can directly inject the sidebar to any file i.e. footer.php/header.php.
