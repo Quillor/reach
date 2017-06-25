@@ -55,7 +55,7 @@ means that all your custom post type code will be coded on that file.
 
 
 *hint:
-- everytime you add new code/css/style and want to view the result you must call the 'gulp' command in the terminal to compile  your codes.
+- everytime you add new code/css/style and want to view the result you must call the `gulp` command in the terminal to compile  your codes.
 
 ### Available gulp commands
 
