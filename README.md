@@ -27,18 +27,18 @@ your-theme-name> bower install
 the first two command is for global command.
 
 ### To add a custom nav
-1. From your theme folder navigate to lib/setup.php and add your custom navigation below this line 
+1. From your theme folder navigate to `lib/setup.php` and add your custom navigation below this line 
 `Register wp_nav_menu() menus`
-2. Then to display it add this file on header/footer or any page with this code. Where as the name_navigation is the name of your custom nav.
+2. Then to display it add this file on `header/footer or any page with this code`. Where as the `name_navigation` is the name of your custom nav.
 `wp_nav_menu(['theme_location' => 'name_navigation', 'menu_class' => 'nav']);`
-3. then go to terminal/cli and from your theme path write this command: your-theme-name> gulp
+3. then go to terminal/cli and from your theme path write this command:
 `your-theme-name> gulp`
 4. that command means to Compile and optimize the files in your assets directory.
 
 ### To add a custom sidebar
-1. From your theme folder navigate to lib/setup.php and add your custom navigation below this line (Register sidebars).
+1. From your theme folder navigate to `lib/setup.php` and add your custom navigation below this line (Register sidebars).
 2. You can just duplicate and rename/duplicate the default sidebars.
-3. Then navigate to themes/templates add your new file to display the custom side bar i.e. my-sidebar.php OR You can directly inject the sidebar to any file i.e. footer.php/header.php.
+3. Then navigate to `themes/templates` add your new file to display the custom side bar i.e. my-sidebar.php OR You can directly inject the sidebar to any file i.e. footer.php/header.php.
 4. then just paste this code 
 `<?php dynamic_sidebar('your-side-bar-id-name'); ?> `
 5. then go to terminal/cli and from your theme path write this command:
