@@ -1,21 +1,3 @@
-### 8.5.1: February 21st, 2017
-* Update gulp-imagemin options ([#1839](https://github.com/roots/sage/pull/1839))
-* Add error handling to `scripts` and `styles` gulp tasks ([#1832](https://github.com/roots/sage/pull/1832))
-* Update to Bootstrap 4.0.0-alpha.6  ([#1832](https://github.com/roots/sage/pull/1832))
-
-### 8.5.0: September 20th, 2016
-* Update installation instructions
-* Update dependencies
-* Update to Bootstrap 4.0.0-alpha.4
-
-### 8.4.2: February 19th, 2016
-* Add Composer vendor directory to gitignore ([#1618](https://github.com/roots/sage/issues/1618))
-* Fix build test by removing trailing space ([#1617](https://github.com/roots/sage/issues/1617))
-* Replace deprecated gulp-minify-css with gulp-cssnano ([#1610](https://github.com/roots/sage/issues/1610))
-
-### 8.4.1: January 27th, 2016
-* Add `composer.json` and update installation instructions ([#1583](https://github.com/roots/sage/issues/1583))
-
 ### 8.4.0: December 1st, 2015
 * Update to Bootstrap 3.3.6 ([#1578](https://github.com/roots/sage/pull/1578))
 * Remove unnecessary underscore ([#1577](https://github.com/roots/sage/pull/1577))
@@ -259,7 +241,7 @@
 * Add placeholder `lib/post-types.php` and `lib/metaboxes.php` files
 * Rename `loop-` files to `content-`
 * Remove all hooks
-* Use `templates/page-header.php` for page titles
+* Use `templates/components/page-header.php` for page titles
 * Use `head.php` for everything in `<head>`
 
 ### 5.2.0: August 18th, 2012

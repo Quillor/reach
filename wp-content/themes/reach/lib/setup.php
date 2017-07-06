@@ -7,15 +7,16 @@ use Roots\Sage\Assets;
 /**
  * Theme setup
  */
-function setup() {
-  // Enable features from Soil when plugin is activated
-  // https://roots.io/plugins/soil/
-  add_theme_support('soil-clean-up');
-  add_theme_support('soil-nav-walker');
-  add_theme_support('soil-nice-search');
-  add_theme_support('soil-jquery-cdn');
-  add_theme_support('soil-relative-urls');
 
+ // Enable features from Soil when plugin is activated
+ // https://roots.io/plugins/soil/
+ add_theme_support('soil-clean-up');
+ // add_theme_support('soil-nav-walker');
+ add_theme_support('soil-nice-search');
+ // add_theme_support('soil-jquery-cdn');
+ // add_theme_support('soil-relative-urls');
+
+function setup() {
   // Make theme available for translation
   // Community translations can be found at https://github.com/roots/sage-translations
   load_theme_textdomain('sage', get_template_directory() . '/lang');
@@ -28,7 +29,7 @@ function setup() {
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
   register_nav_menus([
     'primary_navigation' => __('Primary Navigation', 'sage'),
-    'footer_navigation' => __('Footer Navigation', 'sage')// my addition
+    'footer_navigation' => __('Footer Navigation', 'roots'),
   ]);
 
   // Enable post thumbnails
@@ -39,11 +40,11 @@ function setup() {
 
   // Enable post formats
   // http://codex.wordpress.org/Post_Formats
-  add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
+  add_theme_support('post-formats', ['video']);
 
   // Enable HTML5 markup support
   // http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
-  add_theme_support('html5', ['caption', 'comment-form', 'comment-list', 'gallery', 'search-form']);
+  add_theme_support('html5', ['caption', 'gallery', 'search-form']);
 
   // Use main stylesheet for visual editor
   // To add custom styles edit /assets/styles/layouts/_tinymce.scss
@@ -56,26 +57,8 @@ add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
  */
 function widgets_init() {
   register_sidebar([
-    'name'          => __('Primary', 'sage'),
-    'id'            => 'sidebar-primary',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
-
-  register_sidebar([
-    'name'          => __('Footer', 'sage'),
-    'id'            => 'sidebar-footer',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
-  // my addition
-  register_sidebar([
-    'name'          => __('Post-type', 'sage'),
-    'id'            => 'post-type',
+    'name'          => __('Home Page Sections', 'sage'),
+    'id'            => 'modular-home',
     'before_widget' => '<section class="widget %1$s %2$s">',
     'after_widget'  => '</section>',
     'before_title'  => '<h3>',
@@ -95,7 +78,11 @@ function display_sidebar() {
     // @link https://codex.wordpress.org/Conditional_Tags
     is_404(),
     is_front_page(),
-    is_page_template('template-custom.php'),
+    is_single(),
+    is_page(),
+    is_archive(),
+    is_search(),
+    is_page_template('template-events.php'),
   ]);
 
   return apply_filters('sage/display_sidebar', $display);
@@ -111,6 +98,53 @@ function assets() {
     wp_enqueue_script('comment-reply');
   }
 
+  wp_enqueue_script('translate', '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', array(), null, true);
   wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);
+
+/**
+ * Make sure WP SEO isn't adding meta tags to the head of data dashboard
+ */
+function remove_yoast_data_dashboard() {
+  if (is_post_type_archive('data') || is_singular('data-viz')) {
+    if (defined('WPSEO_VERSION')) { // Yoast SEO
+      global $wpseo_og;
+      remove_action( 'wpseo_head', array( $wpseo_og, 'opengraph' ), 30 );
+      remove_action( 'wpseo_head', array( 'WPSEO_Twitter', 'get_instance' ), 40 );
+    }
+  }
+}
+add_filter('wp_enqueue_scripts', __NAMESPACE__ . '\\remove_yoast_data_dashboard', 10);
+
+/**
+ * Assets for embeds
+ */
+function embed_assets() {
+  wp_enqueue_style('sage/css', Assets\asset_path('styles/embed.css'), false, null);
+  wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
+}
+add_action('enqueue_embed_scripts', __NAMESPACE__ . '\\embed_assets', 100);
+remove_action( 'embed_head', 'print_emoji_detection_script' );
+remove_action( 'embed_head', 'print_emoji_styles' );
+
+/**
+ * Replace default inline embed scripts to remove default share fn code and allow links to open in new tabs
+ */
+function print_embed_scripts() {
+	?>
+	<script type="text/javascript">
+	 <?php readfile( Assets\asset_path('scripts/wp-embed-template.js') ); ?>
+	</script>
+	<?php
+}
+remove_action( 'embed_footer', 'print_embed_scripts' );
+add_action( 'embed_footer', __NAMESPACE__ . '\\print_embed_scripts' );
+
+/**
+ * Required script for PrintFriendly.com
+ */
+function printfriendly_script() {
+  echo "<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if ('https:' === document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script>";
+}
+// add_action('wp_head', __NAMESPACE__ . '\\printfriendly_script');
